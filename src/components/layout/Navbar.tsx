@@ -55,16 +55,26 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
-                        >
-                            {link.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-                        </Link>
-                    ))}
+                    {navLinks.map((link) => {
+                        const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className={cn(
+                                    "text-sm font-medium transition-colors relative group",
+                                    isActive ? "text-white" : "text-gray-300 hover:text-white"
+                                )}
+                            >
+                                {link.name}
+                                <span className={cn(
+                                    "absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300",
+                                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                                )} />
+                            </Link>
+                        );
+                    })}
                 </nav>
 
                 {/* CTA */}
@@ -93,16 +103,22 @@ export function Navbar() {
                         exit={{ opacity: 0, y: -20 }}
                         className="absolute top-20 left-4 right-4 glass-panel rounded-2xl p-6 md:hidden flex flex-col gap-4"
                     >
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-lg font-medium text-gray-300 hover:text-primary transition-colors py-2 border-b border-white/5 last:border-0"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
+                        {navLinks.map((link) => {
+                            const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                            return (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className={cn(
+                                        "text-lg font-medium transition-colors py-2 border-b border-white/5 last:border-0",
+                                        isActive ? "text-primary" : "text-gray-300 hover:text-primary"
+                                    )}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                    {link.name}
+                                </Link>
+                            );
+                        })}
                         <Button className="w-full mt-4 bg-primary text-white">
                             Start Project
                         </Button>
