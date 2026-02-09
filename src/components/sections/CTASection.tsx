@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function CTASection() {
     return (
@@ -26,12 +28,14 @@ export function CTASection() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
-                        <Button size="lg" className="h-14 px-8 text-lg rounded-xl w-full sm:w-auto">
-                            Start Your Project
-                        </Button>
-                        <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-xl border-white/20 bg-transparent hover:bg-white/5 text-white w-full sm:w-auto">
-                            Schedule a Call
-                        </Button>
+                        <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto">
+                            <Link href="/contact" className={cn(buttonVariants({ size: "lg" }), "h-14 px-8 text-lg rounded-xl w-full sm:w-auto")}>
+                                Start Your Project
+                            </Link>
+                            <Link href="/contact" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-14 px-8 text-lg rounded-xl border-white/20 bg-transparent hover:bg-white/5 text-white w-full sm:w-auto")}>
+                                Schedule a Call
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </motion.div>

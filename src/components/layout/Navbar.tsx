@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -79,10 +79,12 @@ export function Navbar() {
 
                 {/* CTA */}
                 <div className="hidden md:flex items-center gap-4">
-                    <Button variant="glass" className="rounded-full text-xs font-semibold px-6 group border-white/5 bg-white/5 hover:bg-white/10">
-                        Start Project
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <div className="hidden md:flex items-center gap-4">
+                        <Link href="/contact" className={cn(buttonVariants({ variant: "glass" }), "rounded-full text-xs font-semibold px-6 group border-white/5 bg-white/5 hover:bg-white/10")}>
+                            Start Project
+                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -119,9 +121,9 @@ export function Navbar() {
                                 </Link>
                             );
                         })}
-                        <Button className="w-full mt-4 bg-primary text-white">
+                        <Link href="/contact" className={cn(buttonVariants(), "w-full mt-4 bg-primary text-white")} onClick={() => setIsMobileMenuOpen(false)}>
                             Start Project
-                        </Button>
+                        </Link>
                     </motion.div>
                 )}
             </AnimatePresence>
